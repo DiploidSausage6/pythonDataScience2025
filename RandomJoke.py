@@ -2,6 +2,7 @@
 
 import random
 
+# got some jokes
 jokes = [
     "Why did the student eat his homework? Because the teacher said it was a piece of cake!",
     "Why can't you trust atoms? Because they make up everything!",
@@ -12,8 +13,8 @@ jokes = [
     "What did the science book say to the history book? You're too old school!",
     "Why did the music teacher need a ladder? To reach the high notes!",
     "Why did the scarecrow win an award? Because he was outstanding in his field!",
-    "What's a ghost's favorite subject? Spelling!"
+    "What's a wizard's favorite subject? Spelling!"
 ]
 
-def jokeFetcher(): 
-    print(jokes[random.randint(0,len(jokes) -1)]) #
+def jokeFetcher(): # made a function
+    print(jokes[random.randint(0,len(jokes) -1)]) # determines a random index number between 0-the length of jokes(-1 to be safe), takes the corresponding joke from the list, and prints it all at once!
