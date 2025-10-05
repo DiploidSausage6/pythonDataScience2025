@@ -1,7 +1,7 @@
 # Write a function to reverse a string
 
 # Ask the user to enter something
-string = input("Enter a string in quotes please: ")
+string = input("Enter anything you want! :) : ")
 
 # To reverse it I think I need to break it up into chunks first that I can look at backwards.
 # A function to reverse the string:
