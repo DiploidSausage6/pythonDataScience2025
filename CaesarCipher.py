@@ -1,6 +1,6 @@
 # this is a program to encrypt a string via the Ceasar Cipher
 beforeMessage = input("enter message you wish to be encrypted:") # take the message that is going to be encrypted
-  key = input("enter amount of letters to skip in order to encrypt:") # take the key to encrypt
+key = input("enter amount of letters to skip in order to encrypt:") # take the key to encrypt
 
 def Encryptor (beforeMessage, key):
   alphabet = ["abcdefghijklmnopqrstuvwxyz"] # make a list of the alphabet to use index numbers later
