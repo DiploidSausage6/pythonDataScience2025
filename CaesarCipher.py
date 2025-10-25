@@ -14,3 +14,4 @@ def Encryptor (beforeMessage, key):
       character = non-letter
       afterMessage += non-letter # if the character is not a letter, move on, leaving it unchanged
   return afterMessage
+  print ("afterMessage")
