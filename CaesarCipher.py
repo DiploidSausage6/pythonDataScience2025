@@ -8,7 +8,7 @@ def Encryptor (beforeMessage, key):
   if key.isdigit():
     key = int(key) # makes key an integer
   else:
-    return "please make your key a number"
+    return "please make your key a spaceless number"
   for character in beforeMessage: # make a for loop
     if character in alphabet: # check if the entered character(s) is a letter
       beforeIndex = alphabet.find(character) # determine the index of the letter(s)
