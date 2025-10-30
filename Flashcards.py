@@ -28,7 +28,7 @@ def runFlashcards():
       print("Thanks for playing!")
       break
     elif userInput.lower() == "i don't know":
-        print(f"ha! you need some help? ok, here's the answer: {answer}")
+        print(f"ha! you need some help? ok, remember this answer for next time you need it!: {answer}")
         
     elif userInput.lower() == answer.lower(): # determines whether the user is correct or incorrect and prints the correct answer if incorrect
       print("Correct!")
