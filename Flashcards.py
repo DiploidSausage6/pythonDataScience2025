@@ -27,6 +27,8 @@ def runFlashcards():
     if userInput.lower() == 'quit': # determines whether the user wants to quit
       print("Thanks for playing!")
       break
+    if userInput.lower() == "i don't know":
+        print(f"ha! you need some help? ok, here's the answer: {answer}")
     if userInput.lower() == answer.lower(): # determines whether the user is correct or incorrect and prints the correct answer if incorrect
       print("Correct!")
     else:
