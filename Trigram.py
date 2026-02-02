@@ -1,3 +1,5 @@
+# this is a program to analyze a block of text and return the top ten trigrams
+
 import string
 
 text = input("enter the text you wish to analyze: ")
