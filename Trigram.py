@@ -1,6 +1,6 @@
 import string
 
-text = "The tortoise and the hare decided to have a race. The hare was very fast and the tortoise was very slow. The hare ran far ahead and then the hare took a nap. While the hare slept, the tortoise kept walking. The tortoise walked and walked until the tortoise passed the sleeping hare. The tortoise won the race because the tortoise never stopped. The hare woke up but the hare was too late. The slow tortoise beat the fast hare."
+text = input("enter the text you wish to analyze: ")
 
 def text_cleaner(text):
   for char in string.punctuation:
@@ -24,4 +24,3 @@ freq_list.sort(reverse=True)
 print("Top 10 Trigrams:")
 for count, trigram in freq_list[:10]:
    print(f"{' '.join(trigram)}: {count}")
-
