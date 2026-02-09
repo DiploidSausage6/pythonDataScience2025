@@ -1,5 +1,17 @@
 # This is a database management application that will involve viewing, adding, editing, and deleting the data
 
+# metadata.yaml
+database_info:
+  name: "school_records"
+  version: 1.0
+  tables:
+    - students
+    - grades
+    - attendance
+settings:
+  auto_save: true
+  max_entries: 500
+
 books = [
     {
         'title': 'The Outsiders',
@@ -477,7 +489,7 @@ def delete_book():
   books = [book for book in books if book['title'] != unwanted_book_title]
   print(f"Succesfully deleted {unwanted_book_title}!")
 while True:
-    print("Menu: [1] Add Book, [2] View Books, [3] Delete Book, [4] Quit")
+    print("Menu: [1] Add Book, [2] View Books, [3] Delete Book, [4] Edit Book, [5] Quit")
     choice = input("Enter your choice: ")
     if choice == '1':
         add_book()
@@ -486,7 +498,9 @@ while True:
     elif choice == '3':
         delete_book()
     elif choice == '4':
+        edit_book()
+    elif choice == '5':
         print("Goodbye!")
         break
     else:
-        print("please type 1, 2, 3, or 4")
+        print("please type 1, 2, 3, 4, or 5")
