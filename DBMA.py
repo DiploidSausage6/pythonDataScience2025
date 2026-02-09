@@ -12,7 +12,6 @@ DB_FILE = 'database.yaml'
 
 def load_books():
     if not os.path.exists(DB_FILE):
-        # Optional: Save the initial list if the file doesn't exist yet
         return []
     with open(DB_FILE, 'r') as file:
         return yaml.safe_load(file) or []
