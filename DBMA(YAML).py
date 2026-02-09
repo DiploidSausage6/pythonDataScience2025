@@ -1,4 +1,5 @@
-# This is a database management application that will involve viewing, adding, editing, and deleting the data
+# This is a database management application that will involve viewing, adding, editing, and deleting the data. Note on YAML: You will need the pyyaml library installed for this to run. If you don't have it, you can install it via terminal using: pip install pyyaml.
+
 import yaml
 import os
 
