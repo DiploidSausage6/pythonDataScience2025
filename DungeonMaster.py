@@ -2,7 +2,7 @@
 
 import turtle
 
-game_running = true
+game_running = True
 
 # =========================
 # LEVELS
@@ -162,12 +162,15 @@ def check_tile():
         print("You found a potion!")
 
     if tile == "E":
+    player.health -= 15
+    if player.health < 0:
+        player.health = 0
+    print("An enemy attacked!")
 
-        player.health = player.health - 15
-        print("An enemy attacked!")
-
-        if player.health <= 0:
-            game_over()
+    if player.health <= 0:
+        game_running = False
+        game_over()
+        return
 
     if tile == "D":
 
@@ -239,24 +242,26 @@ def move_up():
     if game_map[new_y][player.x] != "W":
         player.y = new_y
         check_tile()
-
         if game_running:
             draw_level()
             
 def move_down():
+    
+    if not game_running:
+        return
 
     new_y = player.y + 1
-
     if game_map[new_y][player.x] != "W":
         player.y = new_y
         check_tile()
-        draw_level()
-        
-        if not game_running:
-        return
+        if game_running:
+            draw_level()
 
 def move_left():
 
+    if not game_running:
+        return
+        
     new_x = player.x - 1
 
     if game_map[player.y][new_x] != "W":
@@ -264,10 +269,13 @@ def move_left():
         check_tile()
         draw_level()
         
-        if not game_running:
-        return
-
+        if game_running:
+            draw_level()
+        
 def move_right():
+    
+    if not game_running:
+        return
 
     new_x = player.x + 1
 
@@ -276,8 +284,8 @@ def move_right():
         check_tile()
         draw_level()
         
-        if not game_running:
-        return
+        if game_running:
+            draw_level()
 
 # =========================
 # RESTART GAME
