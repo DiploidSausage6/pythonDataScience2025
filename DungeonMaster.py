@@ -2,6 +2,8 @@
 
 import turtle
 
+game_running = true
+
 # =========================
 # LEVELS
 # =========================
@@ -143,6 +145,8 @@ def draw_level():
 
 def check_tile():
 
+    global game_running
+    
     tile = game_map[player.y][player.x]
 
     if tile == "T":
@@ -227,13 +231,18 @@ def win_game():
 
 def move_up():
 
+    if not game_running:
+        return
+
     new_y = player.y - 1
 
     if game_map[new_y][player.x] != "W":
         player.y = new_y
         check_tile()
-        draw_level()
 
+        if game_running:
+            draw_level()
+            
 def move_down():
 
     new_y = player.y + 1
@@ -242,6 +251,9 @@ def move_down():
         player.y = new_y
         check_tile()
         draw_level()
+        
+        if not game_running:
+        return
 
 def move_left():
 
@@ -251,6 +263,9 @@ def move_left():
         player.x = new_x
         check_tile()
         draw_level()
+        
+        if not game_running:
+        return
 
 def move_right():
 
@@ -260,6 +275,9 @@ def move_right():
         player.x = new_x
         check_tile()
         draw_level()
+        
+        if not game_running:
+        return
 
 # =========================
 # RESTART GAME
@@ -269,7 +287,10 @@ def restart():
 
     global current_level
     global game_map
+    global game_running
 
+    game_running = True
+    
     player.health = 100
     player.gold = 0
 
