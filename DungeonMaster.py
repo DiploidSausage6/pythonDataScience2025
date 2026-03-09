@@ -156,13 +156,13 @@ def check_tile():
         print("You found treasure!")
 
     if tile == "H":
-        player.health += 20
-        if player.health > 100:
-            player.health = 100
-        game_map[player.y][player.x] = "."
-        print("You found a potion!")
+    player.health += 20
+    if player.health > 100:
+        player.health = 100
+    game_map[player.y][player.x] = "."
+    print("You found a potion!")
     
-    if tile == "E":
+   if tile == "E":
     player.health -= 15
     if player.health < 0:
         player.health = 0
