@@ -2,31 +2,50 @@
 
 import turtle
 
+# =========================
+# GAME STATE
+# =========================
+
 game_running = True
+current_level = 0
 
 # =========================
 # LEVELS
 # =========================
 
 Level_1 = [
-["W","W","W","W","W","W","W","W"],
-["W",".",".",".","E",".","T","W"],
-["W",".","W",".",".",".",".","W"],
-["W",".",".",".","W",".","D","W"],
-["W","W","W","W","W","W","W","W"]
+    ["W","W","W","W","W","W","W","W"],
+    ["W",".",".",".","E",".","T","W"],
+    ["W",".","W",".",".",".",".","W"],
+    ["W",".",".",".","W",".","D","W"],
+    ["W","W","W","W","W","W","W","W"]
 ]
 
 Level_2 = [
-["W","W","W","W","W","W","W","W"],
-["W",".",".",".","E",".","T","W"],
-["W",".","W",".",".",".",".","W"],
-["W",".",".",".","W",".","D","W"],
-["W","W","W","W","W","W","W","W"]
+    ["W","W","W","W","W","W","W","W"],
+    ["W",".",".",".","E",".","T","W"],
+    ["W",".","W",".",".",".",".","W"],
+    ["W",".",".",".","W",".","D","W"],
+    ["W","W","W","W","W","W","W","W"]
 ]
 
-levels = [Level_1, Level_2]
-current_level = 0
+Level_3 = [
+    ["W","W","W","W","W","W","W","W"],
+    ["W",".","E",".",".",".","T","W"],
+    ["W",".","W",".","W",".",".","W"],
+    ["W",".",".",".","W",".","D","W"],
+    ["W","W","W","W","W","W","W","W"]
+]
 
+Level_4 = [
+    ["W","W","W","W","W","W","W","W"],
+    ["W",".",".",".","E",".","T","W"],
+    ["W",".",".",".",".","W",".","W"],
+    ["W",".",".",".","W",".","D","W"],
+    ["W","W","W","W","W","W","W","W"]
+]
+
+levels = [Level_1, Level_2, Level_3, Level_4]
 game_map = levels[current_level]
 
 # =========================
@@ -34,7 +53,6 @@ game_map = levels[current_level]
 # =========================
 
 class Player:
-
     def __init__(self):
         self.health = 100
         self.gold = 0
@@ -44,7 +62,7 @@ class Player:
 player = Player()
 
 # =========================
-# SCREEN
+# SCREEN SETUP
 # =========================
 
 screen = turtle.Screen()
@@ -63,15 +81,14 @@ hud.penup()
 TILE_SIZE = 40
 
 # =========================
-# DRAW TILE
+# DRAW TILE FUNCTION
 # =========================
 
-def draw_tile(x,y,color):
+def draw_tile(x, y, color):
 
     drawer.penup()
-    drawer.goto(x,y)
+    drawer.goto(x, y)
     drawer.pendown()
-
     drawer.color(color)
     drawer.begin_fill()
 
@@ -81,23 +98,33 @@ def draw_tile(x,y,color):
 
     drawer.end_fill()
 
+
 # =========================
-# DRAW HUD
+# DRAW HUD FUNCTION
 # =========================
 
 def draw_hud():
 
     hud.clear()
-    hud.goto(-150,160)
+    hud.goto(-150, 160)
 
     text = "Health: " + str(player.health)
-    text = text + "   Gold: " + str(player.gold)
-    text = text + "   Level: " + str(current_level + 1)
+    text = text + "    Gold: " + str(player.gold)
+    text = text + "    Level: " + str(current_level + 1)
 
-    hud.write(text,font=("Arial",16,"normal"))
+    hud.write(text, font=("Arial", 16, "normal"))
+
+    hud.goto(-150, 140)
+    hud.write("Use arrow keys to move.", font=("Arial", 14, "normal"))
+
+    hud.goto(-150, 120)
+    hud.write("Press 'r' to restart the game.", font=("Arial", 14, "normal"))
+
+    hud.goto(-150, 100)
+    hud.write("---------------------------", font=("Arial", 14, "normal"))
 
 # =========================
-# DRAW LEVEL
+# DRAW LEVEL FUNCTION
 # =========================
 
 def draw_level():
@@ -117,52 +144,51 @@ def draw_level():
             screen_y = 100 - row * TILE_SIZE
 
             if tile == "W":
-                draw_tile(screen_x,screen_y,"gray")
-
+                draw_tile(screen_x, screen_y, "gray")
             if tile == ".":
-                draw_tile(screen_x,screen_y,"darkgreen")
-
+                draw_tile(screen_x, screen_y, "darkgreen")
             if tile == "T":
-                draw_tile(screen_x,screen_y,"gold")
-
+                draw_tile(screen_x, screen_y, "gold")
             if tile == "E":
-                draw_tile(screen_x,screen_y,"red")
-
+                draw_tile(screen_x, screen_y, "red")
             if tile == "P":
-                draw_tile(screen_x,screen_y,"blue")
-
+                draw_tile(screen_x, screen_y, "blue")
             if tile == "H":
-                draw_tile(screen_x,screen_y,"pink")
-
+                draw_tile(screen_x, screen_y, "pink")
             if tile == "D":
-                draw_tile(screen_x,screen_y,"purple")
+                draw_tile(screen_x, screen_y, "purple")
+
+            # Extra blank line for verbosity
+            drawer.penup()
+            drawer.goto(drawer.xcor(), drawer.ycor())
 
     draw_hud()
 
+
 # =========================
-# TILE EVENTS
+# TILE EVENTS FUNCTION
 # =========================
 
 def check_tile():
 
     global game_running
-    
+
     tile = game_map[player.y][player.x]
 
     if tile == "T":
-        player.gold += 10
+        player.gold = player.gold + 10
         game_map[player.y][player.x] = "."
         print("You found treasure!")
 
     if tile == "H":
-        player.health += 20
+        player.health = player.health + 20
         if player.health > 100:
             player.health = 100
         game_map[player.y][player.x] = "."
         print("You found a potion!")
-    
+
     if tile == "E":
-        player.health -= 15
+        player.health = player.health - 15
         if player.health < 0:
             player.health = 0
         print("An enemy attacked!")
@@ -174,9 +200,15 @@ def check_tile():
 
     if tile == "D":
         next_level()
-        
+
+    print("Checked tile at position:", player.x, player.y)
+    print("Current Health:", player.health)
+    print("Current Gold:", player.gold)
+    print("-------------------------------")
+
+
 # =========================
-# NEXT LEVEL
+# NEXT LEVEL FUNCTION
 # =========================
 
 def next_level():
@@ -196,9 +228,11 @@ def next_level():
     player.y = 1
 
     draw_level()
+    print("Moved to next level:", current_level + 1)
+
 
 # =========================
-# GAME OVER
+# GAME OVER FUNCTION
 # =========================
 
 def game_over():
@@ -206,14 +240,16 @@ def game_over():
     drawer.clear()
     hud.clear()
 
-    drawer.goto(-120,0)
+    drawer.goto(-120, 0)
     drawer.color("white")
+    drawer.write("GAME OVER", font=("Arial", 30, "bold"))
 
-    drawer.write("GAME OVER",
-    font=("Arial",30,"bold"))
+    print("GAME OVER")
+    print("Reset the game by pressing 'r'")
+
 
 # =========================
-# WIN GAME
+# WIN GAME FUNCTION
 # =========================
 
 def win_game():
@@ -221,14 +257,16 @@ def win_game():
     drawer.clear()
     hud.clear()
 
-    drawer.goto(-140,0)
+    drawer.goto(-140, 0)
     drawer.color("white")
+    drawer.write("YOU WIN!", font=("Arial", 30, "bold"))
 
-    drawer.write("YOU WIN!",
-    font=("Arial",30,"bold"))
+    print("YOU WIN!")
+    print("Thanks for playing!")
+
 
 # =========================
-# MOVEMENT
+# MOVEMENT FUNCTIONS
 # =========================
 
 def move_up():
@@ -237,15 +275,15 @@ def move_up():
         return
 
     new_y = player.y - 1
-
     if game_map[new_y][player.x] != "W":
         player.y = new_y
         check_tile()
         if game_running:
             draw_level()
-            
+
+
 def move_down():
-    
+
     if not game_running:
         return
 
@@ -256,36 +294,35 @@ def move_down():
         if game_running:
             draw_level()
 
+
 def move_left():
 
     if not game_running:
         return
-        
-    new_x = player.x - 1
 
+    new_x = player.x - 1
     if game_map[player.y][new_x] != "W":
         player.x = new_x
         check_tile()
-        
         if game_running:
             draw_level()
-        
+
+
 def move_right():
-    
+
     if not game_running:
         return
 
     new_x = player.x + 1
-
     if game_map[player.y][new_x] != "W":
         player.x = new_x
         check_tile()
-        
         if game_running:
             draw_level()
 
+
 # =========================
-# RESTART GAME
+# RESTART FUNCTION
 # =========================
 
 def restart():
@@ -295,10 +332,9 @@ def restart():
     global game_running
 
     game_running = True
-    
+
     player.health = 100
     player.gold = 0
-
     player.x = 1
     player.y = 1
 
@@ -307,23 +343,25 @@ def restart():
 
     draw_level()
 
+    print("Game restarted")
+    print("-------------------------------")
+
+
 # =========================
 # CONTROLS
 # =========================
 
 screen.listen()
+screen.onkey(move_up, "Up")
+screen.onkey(move_down, "Down")
+screen.onkey(move_left, "Left")
+screen.onkey(move_right, "Right")
+screen.onkey(restart, "r")
 
-screen.onkey(move_up,"Up")
-screen.onkey(move_down,"Down")
-screen.onkey(move_left,"Left")
-screen.onkey(move_right,"Right")
-
-screen.onkey(restart,"r")
 
 # =========================
 # START GAME
 # =========================
 
 draw_level()
-
 screen.mainloop()
