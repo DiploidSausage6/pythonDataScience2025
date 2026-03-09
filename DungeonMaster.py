@@ -150,32 +150,31 @@ def check_tile():
     tile = game_map[player.y][player.x]
 
     if tile == "T":
-
-        player.gold = player.gold + 10
+        player.gold += 10
         game_map[player.y][player.x] = "."
         print("You found treasure!")
 
     if tile == "H":
-    player.health += 20
-    if player.health > 100:
-        player.health = 100
-    game_map[player.y][player.x] = "."
-    print("You found a potion!")
+        player.health += 20
+        if player.health > 100:
+            player.health = 100
+        game_map[player.y][player.x] = "."
+        print("You found a potion!")
     
-   if tile == "E":
-    player.health -= 15
-    if player.health < 0:
-        player.health = 0
-    print("An enemy attacked!")
+    if tile == "E":
+        player.health -= 15
+        if player.health < 0:
+            player.health = 0
+        print("An enemy attacked!")
 
-    if player.health <= 0:
-        game_running = False
-        game_over()
-        return
+        if player.health <= 0:
+            game_running = False
+            game_over()
+            return
+
     if tile == "D":
-
         next_level()
-
+        
 # =========================
 # NEXT LEVEL
 # =========================
