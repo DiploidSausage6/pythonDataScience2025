@@ -156,11 +156,12 @@ def check_tile():
         print("You found treasure!")
 
     if tile == "H":
-
-        player.health = player.health + 20
-        game_map[player.y][player.x] = "."
-        print("You found a potion!")
-
+    player.health += 20
+    if player.health > 100:
+        player.health = 100
+    game_map[player.y][player.x] = "."
+    print("You found a potion!")
+    
     if tile == "E":
     player.health -= 15
     if player.health < 0:
@@ -171,7 +172,6 @@ def check_tile():
         game_running = False
         game_over()
         return
-
     if tile == "D":
 
         next_level()
@@ -267,7 +267,6 @@ def move_left():
     if game_map[player.y][new_x] != "W":
         player.x = new_x
         check_tile()
-        draw_level()
         
         if game_running:
             draw_level()
@@ -282,7 +281,6 @@ def move_right():
     if game_map[player.y][new_x] != "W":
         player.x = new_x
         check_tile()
-        draw_level()
         
         if game_running:
             draw_level()
