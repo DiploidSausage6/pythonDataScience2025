@@ -1,0 +1,31 @@
+class Class:
+    id: int
+    name: str
+    teacher_id: int
+    student_ids: list
+    room_id: int
+    time_id: int
+
+    def __init__(self, id: int, name: str, teacher_id: int, room_id: int, time_id: int):
+        self.id = id
+        self.name = name
+        self.teacher_id = teacher_id
+        self.student_ids = []
+        self.room_id = room_id
+        self.time_id = time_id
+
+    def add_student(self, student_id: int):
+        self.student_ids.append(student_id)
+
+    def remove_student(self, student_id: int):
+        if student_id in self.student_ids:
+            self.student_ids.remove(student_id)
+
+    def assign_teacher(self, teacher_id: int):
+        self.teacher_id = teacher_id
+
+    def assign_room(self, room_id: int):
+        self.room_id = room_id
+
+    def assign_time(self, time_id: int):
+        self.time_id = time_id
